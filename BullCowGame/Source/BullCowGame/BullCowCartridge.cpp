@@ -4,14 +4,15 @@
 void UBullCowCartridge::BeginPlay() // When the game starts
 {
     Super::BeginPlay();
+    SetupGame();//Setting Up Game
 
+    PrintLine(FString::Printf(TEXT("The hidden word is: %s"),*HiddenWord));// Debug line
     //Welcoming the layer
     PrintLine(TEXT("Welcome to bull cow game"));
     PrintLine(TEXT("Guess the four letter word.")); //Magic number remove
     PrintLine(TEXT("Press enter to continue."));
     
-    //Setting Up Game
-    HiddenWord=TEXT("halo"); // Set the HiddenWord
+
 
     //Set Lives
 
@@ -29,6 +30,10 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     if(Input==HiddenWord){
         PrintLine(TEXT("You win!"));
     }else{
+        if (HiddenWord.Len()!=Input.Len())
+        {
+            PrintLine(TEXT("The hidden word is 4 characters long"));
+        }
         PrintLine(TEXT("You Lose!"));
     }
     //remove lives
@@ -42,4 +47,10 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     //if No Show Gameover and HiddenWord
     //Prompt to Play Again. Press Enter to play again
     //Check User input
+}
+
+void UBullCowCartridge::SetupGame()
+{
+    HiddenWord=TEXT("halo");
+    Lives=5;
 }
