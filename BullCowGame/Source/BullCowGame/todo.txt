@@ -1,0 +1,2 @@
+TO DO:
+*   Make a difficulty setting
